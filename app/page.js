@@ -5,15 +5,15 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function Home() {
   
-  const handleLogin = async () => {
-    // This triggers the Google Login
+    const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin,
+        // This line automatically detects your Vercel URL
+        redirectTo: window.location.origin 
       },
     });
-    if (error) console.log("Error logging in:", error.message);
+    if (error) alert("Login Error: " + error.message);
   };
 
   return (
