@@ -1,111 +1,84 @@
 "use client";
 import { motion } from "framer-motion";
-import { Shield, Zap, Cpu, ArrowRight } from "lucide-react";
+import { supabase } from "../utils/supabase";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function Home() {
+  
+  const handleLogin = async () => {
+    // This triggers the Google Login
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+    if (error) console.log("Error logging in:", error.message);
+  };
+
   return (
-    <main className="relative min-h-screen flex flex-col items-center px-6 overflow-hidden">
-      {/* Visual Foundations */}
-      <div className="aurora-bg" />
-      <div className="noise" />
-
-      {/* 1. ULTRA-MINIMAL NAV */}
-      <motion.nav 
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="w-full max-w-5xl flex justify-between items-center py-8"
-      >
-        <div className="flex items-center gap-2">
-          <img src="https://i.postimg.cc/15bRJjJw/181324196-1782545815145541.jpg" className="w-8 h-8 rounded-lg" alt="Logo" />
-          <span className="font-bold tracking-tighter text-lg uppercase">Elevate</span>
-        </div>
-        <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold uppercase tracking-widest text-white/50">
-          Beta v1.0
-        </div>
-      </motion.nav>
-
-      {/* 2. CINEMATIC HERO */}
-      <section className="flex flex-col items-center pt-12 pb-20 text-center">
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-8"
-        >
+    <main className="relative min-h-screen flex flex-col items-center justify-center bg-[#020008] text-white px-6 overflow-hidden">
+      
+      {/* ELITE GLOW SYSTEM (Fixes the "Black Paper" feel) */}
+      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#3200a8] opacity-20 blur-[120px] rounded-full animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#00d2ff] opacity-10 blur-[100px] rounded-full" />
+      
+      {/* LOGO SECTION */}
+      <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="mb-12">
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-500 rounded-[40px] blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
           <img 
             src="https://i.postimg.cc/15bRJjJw/181324196-1782545815145541.jpg" 
-            className="w-32 h-32 rounded-[40px] shadow-[0_0_50px_rgba(50,0,168,0.3)] border border-white/20"
-            alt="Hero Logo"
+            className="relative w-28 h-28 rounded-[38px] border border-white/10"
+            alt="Elevate Logo"
           />
-        </motion.div>
+        </div>
+      </motion.div>
 
+      {/* TEXT SECTION */}
+      <div className="text-center mb-10">
         <motion.h1 
-          initial={{ y: 20, opacity: 0 }}
+          initial={{ y: 20, opacity: 0 }} 
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-[14vw] md:text-8xl font-black tracking-tighter leading-[0.85] hero-gradient mb-6"
+          className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-4 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent"
         >
-          INTELLIGENCE <br /> EVOLVED.
+          ELEVATE<br/>THE FUTURE.
         </motion.h1>
-
-        <motion.p 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-white/40 text-lg md:text-xl max-w-md font-light leading-relaxed mb-10"
-        >
-          Experience the world's most sophisticated AI, wrapped in a high-performance interface.
-        </motion.p>
-
-        {/* 3. PREMIUM ACTION AREA */}
-        <motion.div 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="w-full max-w-md p-2 rounded-[32px] bg-white/5 border border-white/10 backdrop-blur-3xl"
-        >
-          <button className="w-full group relative flex items-center justify-between bg-white text-black h-16 px-8 rounded-[24px] font-bold transition-transform active:scale-95">
-            <span>START ELEVATING</span>
-            <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-          </button>
-        </motion.div>
-      </section>
-
-      {/* 4. THE BENTO GRID (REFINED) */}
-      <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-4 pb-20">
-        
-        <div className="premium-card p-8 col-span-1 md:col-span-2 flex flex-col justify-between min-h-[240px]">
-          <div className="flex justify-between items-start">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-              <Cpu className="text-indigo-400" />
-            </div>
-            <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Active</span>
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold tracking-tight mb-2">Neural Engine L4</h3>
-            <p className="text-white/40 text-sm">Processing 4.2 trillion parameters per second with zero-shot logic.</p>
-          </div>
-        </div>
-
-        <div className="premium-card p-8 flex flex-col justify-between">
-          <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-            <Zap className="text-cyan-400" />
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold tracking-tight mb-2">12ms</h3>
-            <p className="text-white/40 text-sm">Real-time response latency.</p>
-          </div>
-        </div>
-
-      </section>
-
-      {/* Floating Ambient Label */}
-      <div className="fixed bottom-10 left-10 hidden md:block">
-        <div className="flex items-center gap-3">
-          <div className="w-1 h-1 rounded-full bg-green-500 animate-ping" />
-          <span className="text-[10px] tracking-[0.3em] text-white/20 uppercase font-bold">Encrypted Connection</span>
-        </div>
+        <p className="text-white/30 text-sm tracking-[0.2em] uppercase font-bold flex items-center justify-center gap-2">
+          <Sparkles size={14} className="text-cyan-400" /> Powered by Quantum L4
+        </p>
       </div>
+
+      {/* LOGIN BOX */}
+      <motion.div 
+        initial={{ y: 20, opacity: 0 }} 
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="w-full max-w-sm p-[1px] bg-gradient-to-b from-white/20 to-transparent rounded-[32px]"
+      >
+        <div className="bg-[#050012]/80 backdrop-blur-3xl p-8 rounded-[31px] flex flex-col items-center">
+          <button 
+            onClick={handleLogin}
+            className="w-full h-16 bg-white text-black rounded-2xl font-black flex items-center justify-between px-8 hover:scale-[1.02] active:scale-95 transition-all shadow-xl"
+          >
+            <span className="flex items-center gap-3 text-sm">
+              <img src="https://www.google.com/favicon.ico" className="w-4 h-4" />
+              GOOGLE ACCESS
+            </span>
+            <ArrowRight size={20} />
+          </button>
+          
+          <p className="mt-6 text-[10px] text-white/20 tracking-[0.3em] font-medium">END-TO-END ENCRYPTED</p>
+        </div>
+      </motion.div>
+
+      {/* FOOTER DETAIL */}
+      <div className="absolute bottom-10 flex gap-8 opacity-20 grayscale">
+        <div className="text-[10px] font-bold tracking-widest uppercase">AES-256</div>
+        <div className="text-[10px] font-bold tracking-widest uppercase">SSL Ready</div>
+        <div className="text-[10px] font-bold tracking-widest uppercase">ISO 27001</div>
+      </div>
+
     </main>
   );
-              }
+}
