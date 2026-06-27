@@ -1,77 +1,111 @@
 "use client";
 import { motion } from "framer-motion";
-import { Cpu, Zap, Shield, Globe, Command } from "lucide-react";
+import { Shield, Zap, Cpu, ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-start px-6 pt-10 pb-24 bg-[#03000a] overflow-hidden text-white font-sans">
-      
-      {/* 1. TOP STATUS BAR (Elite Detail) */}
-      <nav className="w-full max-w-sm flex justify-between items-center mb-12 px-4 py-2 bg-white/5 rounded-full border border-white/10 backdrop-blur-md">
+    <main className="relative min-h-screen flex flex-col items-center px-6 overflow-hidden">
+      {/* Visual Foundations */}
+      <div className="aurora-bg" />
+      <div className="noise" />
+
+      {/* 1. ULTRA-MINIMAL NAV */}
+      <motion.nav 
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="w-full max-w-5xl flex justify-between items-center py-8"
+      >
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-[10px] tracking-widest uppercase opacity-50">Systems Online</span>
+          <img src="https://i.postimg.cc/15bRJjJw/181324196-1782545815145541.jpg" className="w-8 h-8 rounded-lg" alt="Logo" />
+          <span className="font-bold tracking-tighter text-lg uppercase">Elevate</span>
         </div>
-        <span className="text-[10px] tracking-widest uppercase opacity-50 font-bold">v1.0.4</span>
-      </nav>
-
-      {/* 2. THE HERO (Cinematic) */}
-      <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-10">
-        <div className="relative inline-block mb-6">
-          <div className="absolute inset-0 bg-cyan-500 blur-3xl opacity-20 scale-150 animate-pulse" />
-          <img src="https://i.postimg.cc/15bRJjJw/181324196-1782545815145541.jpg" className="relative w-24 h-24 rounded-[28px] border border-white/20 shadow-2xl" alt="Elevate" />
+        <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold uppercase tracking-widest text-white/50">
+          Beta v1.0
         </div>
-        <h1 className="text-6xl font-black tracking-tighter mb-4 leading-none">ELEVATE<span className="text-cyan-400">AI</span></h1>
-        <p className="text-white/40 text-sm max-w-[280px] mx-auto leading-relaxed italic">"Beyond intelligence. Toward evolution."</p>
-      </motion.div>
+      </motion.nav>
 
-      {/* 3. LOGIN SECTION */}
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }} className="w-full max-w-sm p-8 bg-white/5 border border-white/10 rounded-[35px] backdrop-blur-2xl mb-8 relative group overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
-        <h2 className="text-center text-[10px] uppercase tracking-[0.4em] mb-8 text-white/30">Gateway Access</h2>
-        <button className="w-full h-16 bg-white text-black rounded-[20px] font-black text-sm flex items-center justify-center gap-4 active:scale-95 transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-          <img src="https://www.google.com/favicon.ico" className="w-5 h-5" alt="google" />
-          SIGN IN WITH GOOGLE
-        </button>
-      </motion.div>
+      {/* 2. CINEMATIC HERO */}
+      <section className="flex flex-col items-center pt-12 pb-20 text-center">
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="mb-8"
+        >
+          <img 
+            src="https://i.postimg.cc/15bRJjJw/181324196-1782545815145541.jpg" 
+            className="w-32 h-32 rounded-[40px] shadow-[0_0_50px_rgba(50,0,168,0.3)] border border-white/20"
+            alt="Hero Logo"
+          />
+        </motion.div>
 
-      {/* 4. THE "DETAIL" BENTO GRID (The Engine & Latency) */}
-      <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
+        <motion.h1 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-[14vw] md:text-8xl font-black tracking-tighter leading-[0.85] hero-gradient mb-6"
+        >
+          INTELLIGENCE <br /> EVOLVED.
+        </motion.h1>
+
+        <motion.p 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-white/40 text-lg md:text-xl max-w-md font-light leading-relaxed mb-10"
+        >
+          Experience the world's most sophisticated AI, wrapped in a high-performance interface.
+        </motion.p>
+
+        {/* 3. PREMIUM ACTION AREA */}
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="w-full max-w-md p-2 rounded-[32px] bg-white/5 border border-white/10 backdrop-blur-3xl"
+        >
+          <button className="w-full group relative flex items-center justify-between bg-white text-black h-16 px-8 rounded-[24px] font-bold transition-transform active:scale-95">
+            <span>START ELEVATING</span>
+            <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+          </button>
+        </motion.div>
+      </section>
+
+      {/* 4. THE BENTO GRID (REFINED) */}
+      <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-4 pb-20">
         
-        {/* Engine Box */}
-        <div className="p-6 bg-white/5 border border-white/10 rounded-[28px] flex flex-col gap-4">
-          <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center shadow-[inset_0_0_10px_rgba(168,85,247,0.2)]">
-            <Cpu size={18} className="text-purple-400" />
+        <div className="premium-card p-8 col-span-1 md:col-span-2 flex flex-col justify-between min-h-[240px]">
+          <div className="flex justify-between items-start">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+              <Cpu className="text-indigo-400" />
+            </div>
+            <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Active</span>
           </div>
           <div>
-            <p className="text-[9px] text-white/30 uppercase tracking-[0.2em]">Neural Engine</p>
-            <p className="text-sm font-bold tracking-tight">Quantum L4</p>
+            <h3 className="text-2xl font-bold tracking-tight mb-2">Neural Engine L4</h3>
+            <p className="text-white/40 text-sm">Processing 4.2 trillion parameters per second with zero-shot logic.</p>
           </div>
         </div>
 
-        {/* Speed Box */}
-        <div className="p-6 bg-white/5 border border-white/10 rounded-[28px] flex flex-col gap-4">
-          <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center shadow-[inset_0_0_10px_rgba(6,182,212,0.2)]">
-            <Zap size={18} className="text-cyan-400" />
+        <div className="premium-card p-8 flex flex-col justify-between">
+          <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+            <Zap className="text-cyan-400" />
           </div>
           <div>
-            <p className="text-[9px] text-white/30 uppercase tracking-[0.2em]">Response</p>
-            <p className="text-sm font-bold tracking-tight">12ms Core</p>
+            <h3 className="text-2xl font-bold tracking-tight mb-2">12ms</h3>
+            <p className="text-white/40 text-sm">Real-time response latency.</p>
           </div>
         </div>
 
-        {/* Security Box (Full Width) */}
-        <div className="col-span-2 p-6 bg-white/5 border border-white/10 rounded-[28px] flex items-center gap-6">
-          <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-            <Shield size={22} className="text-white/80" />
-          </div>
-          <div>
-            <p className="text-[9px] text-white/30 uppercase tracking-[0.2em]">Encryption</p>
-            <p className="text-sm font-bold tracking-tight text-white/80">Military-Grade AES 256</p>
-          </div>
+      </section>
+
+      {/* Floating Ambient Label */}
+      <div className="fixed bottom-10 left-10 hidden md:block">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-1 rounded-full bg-green-500 animate-ping" />
+          <span className="text-[10px] tracking-[0.3em] text-white/20 uppercase font-bold">Encrypted Connection</span>
         </div>
       </div>
-
     </main>
   );
-  }
+              }
